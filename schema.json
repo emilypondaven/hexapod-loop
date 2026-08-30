@@ -1,0 +1,28 @@
+{
+  "trial_id": "int, sequential",
+  "timestamp": "ISO 8601, taken at trial start",
+  "batch": "string, groups trials run under one config",
+  "config": {
+    "gait": "1 = tripod, 2 = wave",
+    "x": "mm, lateral stride, -35 to 35",
+    "y": "mm, forward stride, -35 to 35",
+    "speed": "2 to 10, inverted: higher = fewer frames = coarser",
+    "angle": "degrees, turn per cycle",
+    "step_height_Z": "mm, swing leg lift, default 40",
+    "body_height": "mm, default -25",
+    "leg_order": "list of 6, gait 2 only, null for gait 1",
+    "target_distance": "cm, fixed course length"
+  },
+  "measured": {
+    "distance": "cm, where it actually got to",
+    "cycles": "int, how many it took. Measured, not chosen",
+    "duration": "s, wall clock",
+    "outcome": "one of the categories below"
+  },
+  "attitude": {
+    "max_pitch": "degrees, from IMU during run",
+    "max_roll": "degrees, from IMU during run"
+  },
+  "outcome_categories": ["completed", "drifted", "tipped", "leg_slipped", "brownout", "aborted"],
+  "notes": "free text"
+}
