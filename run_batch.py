@@ -1,6 +1,6 @@
 import sys, time, json, csv, os
 from datetime import datetime
-from trial_run import next_trial_id, run_trial
+from run_trial import next_trial_id, run_trial
 
 sys.path.append("/home/emily/Freenove_Big_Hexapod_Robot_Kit_for_Raspberry_Pi/Code/Server")
 from control import Control
