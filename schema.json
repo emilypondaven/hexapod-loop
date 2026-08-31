@@ -10,7 +10,6 @@
     "angle": "degrees, turn per cycle",
     "step_height_Z": "mm, swing leg lift, default 40",
     "body_height": "mm, default -25",
-    "leg_order": "list of 6, gait 2 only, null for gait 1",
     "target_distance": "cm, fixed course length"
   },
   "measured": {

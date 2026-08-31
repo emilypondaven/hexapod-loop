@@ -1,5 +1,5 @@
 {
-  "batch": "A",
+  "batch": 1,
   "gait": 1,
   "x": 0,
   "y": 25,
@@ -7,6 +7,5 @@
   "angle": 0,
   "step_height_Z": 40,
   "body_height": -25,
-  "leg_order": null,
   "target_distance": 200
 }

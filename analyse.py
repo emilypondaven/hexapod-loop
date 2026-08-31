@@ -56,6 +56,7 @@ def analyse():
             "mean_max_roll": round(sum(max_rolls) / len(max_rolls), 1) if max_rolls else 0,
         }
         summaries.append(summary)
+        return summaries
 
 if __name__ == "__main__":
     summaries = analyse()
