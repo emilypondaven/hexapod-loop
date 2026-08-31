@@ -1,1 +1,4 @@
 trial_id,timestamp,batch,distance,cycles,duration,outcome,max_pitch,max_roll,notes
+1,2026-08-31T21:46:10,1,100.0,11,20.06,completed,1.1,2.6,
+2,2026-08-31T21:46:47,1,100.0,11,21.55,completed,0.2,2.3,
+3,2026-08-31T21:47:44,1,60.0,7,13.28,leg_slipped,0.4,0.4,stopped moving and body fell down while the legs tried to keep moving. Too heavy maybe
