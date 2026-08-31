@@ -4,12 +4,16 @@
 ## answer: the update config
 import json, os
 import urllib.request
+import urllib.error
 from datetime import datetime
 from analyse import analyse
+from openai import OpenAI
+from dotenv import load_dotenv
+load_dotenv()
 
 CONFIG = "config.json"
 PROMPT = "prompt.md"
-URL = "https://api.groq.com/openai/v1/chat/completions"
+BASE_URL = "https://api.groq.com/openai/v1"
 MODEL = "openai/gpt-oss-120b"
 
 TUNABLE = (
@@ -74,18 +78,17 @@ def build_prompt(summaries, config):
     )
     
 def ask_model(user_prompt):
-    api_key = os.environ.get("GROQ_API_KEY")
-    if not api_key:
+    key = os.environ.get("GROQ_API_KEY")
+    if not key:
         raise SystemExit("GROQ_API_KEY not set")
     
-    payload = {
-        "model": MODEL,
-        "messages": [{"role": "user", "content": user_prompt}],
-        "max_completion_tokens": 2048,
-        "temperature": 0.6,
-        "include_reasoning": True,
-        "reasoning_effort": "high",
-        "response_format": {
+    client = OpenAI(api_key=key, base_url=BASE_URL)
+    response = client.chat.completions.create(
+        model=MODEL,
+        messages=[{"role": "user", "content": user_prompt}],
+        max_completion_tokens=2048,
+        temperature=0.6,
+        response_format={
             "type": "json_schema",
             "json_schema": {
                 "name": "gait_suggestion",
@@ -93,20 +96,15 @@ def ask_model(user_prompt):
                 "schema": SCHEMA,
             },
         },
-    }
-    request = urllib.request.Request(
-        URL,
-        data=json.dumps(payload).encode(),
-        headers={
-            "Authorization": f"Bearer {api_key}",
-            "content-type": "application/json",
+        extra_body={
+            "include_reasoning": True,
+            "reasoning_effort": "high",
         },
     )
-    with urllib.request.urlopen(request) as response:
-        body = json.loads(response.read())
  
-    message = body["choices"][0]["message"]
-    return json.loads(message["content"]), message.get("reasoning")
+    message = response.choices[0].message
+    trace = (message.model_extra or {}).get("reasoning")
+    return json.loads(message.content), trace
 
 def apply_suggestion(config, param, value):
     updated = dict(config)
