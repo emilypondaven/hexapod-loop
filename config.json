@@ -1,9 +1,9 @@
 {
-  "batch": 1,
+  "batch": "2",
   "gait": 1,
   "x": 0,
   "y": 25,
-  "speed": 5,
+  "speed": 4,
   "angle": 0,
   "step_height_Z": 40,
   "body_height": -25,
