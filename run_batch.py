@@ -15,7 +15,7 @@ control = Control()
 
 # Set all variables from config
 control.body_height = config["body_height"]
-n_trials = int(sys.argv[1]) if len(sys.argv) > 1 else 10
+n_trials = int(sys.argv[1]) if len(sys.argv) > 1 else 5
 
 for i in range(n_trials):
     trial_id = next_trial_id()
